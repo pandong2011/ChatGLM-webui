@@ -42,10 +42,10 @@ def apply_max_round_click(ctx, max_round):
     return f"Applied: max round {ctx.max_rounds}"
 
 
-def create_ui():
+def create_ui(root_url=""):
     reload_javascript()
 
-    with gr.Blocks(css=css, analytics_enabled=False) as chat_interface:
+    with gr.Blocks(root_url=root_url, css=css, analytics_enabled=False) as chat_interface:
         _ctx = Context()
         state = gr.State(_ctx)
         with gr.Row():
@@ -57,7 +57,8 @@ def create_ui():
                             max_length = gr.Slider(minimum=4, maximum=4096, step=4, label='Max Length', value=2048)
                             top_p = gr.Slider(minimum=0.01, maximum=1.0, step=0.01, label='Top P', value=0.7)
                         with gr.Row():
-                            temperature = gr.Slider(minimum=0.01, maximum=1.0, step=0.01, label='Temperature', value=0.95)
+                            temperature = gr.Slider(minimum=0.01, maximum=1.0, step=0.01, label='Temperature',
+                                                    value=0.95)
 
                         with gr.Row():
                             max_rounds = gr.Slider(minimum=1, maximum=100, step=1, label="最大对话轮数", value=20)
@@ -84,7 +85,8 @@ def create_ui():
             with gr.Column(scale=7):
                 chatbot = gr.Chatbot(elem_id="chat-box", show_label=False, height=800)
                 with gr.Row():
-                    input_message = gr.Textbox(placeholder="输入你的内容...(按 Ctrl+Enter 发送)", show_label=False, lines=4, elem_id="chat-input", container=False)
+                    input_message = gr.Textbox(placeholder="输入你的内容...(按 Ctrl+Enter 发送)", show_label=False, lines=4,
+                                               elem_id="chat-input", container=False)
                     clear_input = gr.Button("🗑️", elem_id="del-btn")
 
                 with gr.Row():

@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import sysconfig
 from modules import options
@@ -8,8 +9,11 @@ from modules.model import load_model
 from modules.options import cmd_opts
 from modules.ui import create_ui
 
+sys.path.append("/root/autodl-tmp/base-model/ZhipuAI/ChatGLM-6B")
+
 # patch PATH for cpm_kernels libcudart lookup
-os.environ['PATH'] = os.environ.get("PATH", "") + os.pathsep + os.path.join(sysconfig.get_paths()["purelib"], "torch\lib")
+os.environ['PATH'] = os.environ.get("PATH", "") + os.pathsep + os.path.join(sysconfig.get_paths()["purelib"],
+                                                                            "torch\lib")
 
 
 def ensure_output_dirs():
@@ -41,13 +45,12 @@ def wait_on_server(ui=None):
 
 def main():
     while True:
-        ui = create_ui()
+        ui = create_ui(cmd_opts.path_prefix)
         ui.queue(concurrency_count=5, max_size=64).launch(
             server_name="0.0.0.0" if cmd_opts.listen else None,
             server_port=cmd_opts.port,
             share=cmd_opts.share,
-            prevent_thread_lock=True,
-            root_path=cmd_opts.path_prefix,
+            prevent_thread_lock=True
         )
         wait_on_server(ui)
         print('Restarting UI...')

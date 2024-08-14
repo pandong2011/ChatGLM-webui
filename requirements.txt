@@ -1,5 +1,9 @@
-protobuf>=3.19.5,<3.20.1
-transformers>=4.26.1
+# protobuf>=3.19.6,<3.20.1
+protobuf==3.19.6
+# transformers>=4.26.1
+transformers==4.27.1
 icetk
 cpm_kernels
 gradio==3.21.0
+torch==2.0.0
+modelscope

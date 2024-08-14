@@ -1,0 +1,2 @@
+ssh -CNg -L 6006:127.0.0.1:6006 root@connect.cqa1.seetacloud.com -p 45030
+OHI/PWJMom3h

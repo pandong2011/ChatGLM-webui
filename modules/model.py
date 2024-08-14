@@ -86,7 +86,7 @@ def infer(query,
         return
 
     if not model:
-        raise "Model not loaded"
+        raise Exception("Model not loaded")
 
     if history is None:
         history = []
