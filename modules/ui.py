@@ -42,10 +42,10 @@ def apply_max_round_click(ctx, max_round):
     return f"Applied: max round {ctx.max_rounds}"
 
 
-def create_ui(root_url=""):
+def create_ui():
     reload_javascript()
 
-    with gr.Blocks(root_url=root_url, css=css, analytics_enabled=False) as chat_interface:
+    with gr.Blocks(css=css, analytics_enabled=False) as chat_interface:
         _ctx = Context()
         state = gr.State(_ctx)
         with gr.Row():
